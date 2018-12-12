@@ -18,7 +18,11 @@ router.get('/', (req, res) => {
   const mode = req.query['hub.mode'];
   const challenge = req.query['hub.challenge'];
   const verifyToken = req.query['hub.verify_token'];
-  res.json({ mode, verifyToken, challenge });
+  if (verifyToken === process.env.FB_VER_VAR) {
+    res.send(challenge);
+  } else {
+    res.send(mode);
+  }
 });
 
 module.exports = router;
