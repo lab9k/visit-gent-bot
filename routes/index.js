@@ -3,13 +3,24 @@ const Sparql = require('../services/sparql');
 
 const router = express.Router();
 
-/* GET home page. */
-router.get('/attractions', (req, res) => {
+const getData = (kind) => {
   const api = new Sparql('https://stad.gent/sparql');
-  api
-    .getAttractions()
-    .then(data => res.json(data))
-    .catch(err => res.json(err));
+  switch (kind) {
+    case 'attractions':
+      return cb => api.getAttractions().then(data => cb(null, data));
+    case 'events':
+      return cb => api.getEvents().then(data => cb(null, data));
+    case 'combined':
+      return cb => Promise
+        .all([api.getAttractions(), api.getEvents()])
+        .then(data => cb(null, data));
+    default:
+      return cb => Promise.resolve('No valid datatype specified.').then(err => cb(new Error(err), null));
+  }
+};
+
+router.get('/', (req, res) => {
+  getData('combined')((err, data) => (!err ? res.json(data) : res.json({ error: err.message })));
 });
 
 module.exports = router;
