@@ -8,18 +8,19 @@ module.exports = ({
 module.exports.types = types;
 // ? incoming text message
 // {
-//   "sender":{
-//     "id":"<PSID>"
-//   },
-//   "recipient":{
-//     "id":"<PAGE_ID>"
-//   },
-//   "timestamp":1458692752478,
-//   "message":{
-//     "mid":"mid.1457764197618:41d102a3e1ae206a38",
-//     "text":"hello, world!",
-//     "quick_reply": {
-//       "payload": "<DEVELOPER_DEFINED_PAYLOAD>"
-//     }
-//   }
-// }
+//   object: 'page',
+//   entry: [
+//     {
+//       id: '241493093110339',
+//       time: 1544620032043,
+//       messaging: [
+//         {
+//           recipient: { id: '241493093110339' },
+//           timestamp: 1544620032043,
+//           sender: { id: '1852210014835079' },
+//           postback: { payload: 'FACEBOOK_WELCOME', title: 'Get Started' },
+//         },
+//       ],
+//     },
+//   ],
+// };

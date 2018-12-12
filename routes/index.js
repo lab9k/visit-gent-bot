@@ -6,9 +6,16 @@ const router = express.Router();
 router.post('/', (req, res) => {
   console.log(JSON.stringify({ ...req.body }));
   return res.json({
-    content_type: 'text',
-    title: '<BUTTON_TEXT>',
-    payload: 'koekoek',
+    message: {
+      text: 'Here is a quick reply!',
+      quick_replies: [
+        {
+          content_type: 'text',
+          title: 'Search',
+          payload: 'kdjnf',
+        },
+      ],
+    },
   });
 
   // getData('combined')((err, data) => (!err ? res.json(data) : res.json({ error: err.message })));
