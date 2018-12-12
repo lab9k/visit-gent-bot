@@ -1,22 +1,41 @@
 const express = require('express');
+const axios = require('axios');
 // const getData = require('../services/index');
 
 const router = express.Router();
 
+function sendMessage(recipientId, message) {
+  axios
+    .post('https://graph.facebook.com/v3.0/me/messages', {
+      params: {
+        access_token: process.env.FB_ACCESS_TOKEN,
+      },
+
+      method: 'POST',
+      data: {
+        recipient: { id: recipientId },
+        message,
+      },
+    })
+    .then((error, response, body) => {
+      if (error) {
+        console.log('Error sending message: ', error);
+      } else if (response.body.error) {
+        console.log('Error: ', response.body.error);
+      }
+      console.log(JSON.stringify(body));
+    });
+}
+
 router.post('/', (req, res) => {
-  console.log(JSON.stringify({ ...req.body }));
-  return res.json({
-    message: {
-      text: 'Here is a quick reply!',
-      quick_replies: [
-        {
-          content_type: 'text',
-          title: 'Search',
-          payload: 'kdjnf',
-        },
-      ],
-    },
-  });
+  const events = req.body.entry[0].messaging;
+  for (let i = 0; i < events.length; i += 1) {
+    const event = events[i];
+    if (event.message && event.message.text) {
+      sendMessage(event.sender.id, { text: `Echo: ${event.message.text}` });
+    }
+  }
+  res.sendStatus(200);
 
   // getData('combined')((err, data) => (!err ? res.json(data) : res.json({ error: err.message })));
 });
