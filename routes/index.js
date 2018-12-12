@@ -24,7 +24,8 @@ function sendMessage(recipientId, message) {
         console.log('Error: ', response.body.error);
       }
       console.log(JSON.stringify(body));
-    });
+    })
+    .catch(err => console.log(err));
 }
 
 router.post('/', (req, res) => {
