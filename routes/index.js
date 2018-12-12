@@ -3,7 +3,7 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
   console.log(req.body);
   return res.json({
     content_type: 'text',
@@ -12,6 +12,13 @@ router.get('/', (req, res) => {
   });
 
   // getData('combined')((err, data) => (!err ? res.json(data) : res.json({ error: err.message })));
+});
+
+router.get('/', (req, res) => {
+  const mode = req.query['hub.mode'];
+  const challenge = req.query['hub.challenge'];
+  const verifyToken = req.query['hub.verify_token'];
+  res.json({ mode, verifyToken, challenge });
 });
 
 module.exports = router;
