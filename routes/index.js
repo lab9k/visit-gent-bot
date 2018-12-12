@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/', (req, res) => {
-  console.log(req.body);
+  console.log(JSON.stringify({ ...req.body }));
   return res.json({
     content_type: 'text',
     title: '<BUTTON_TEXT>',
