@@ -1,7 +1,6 @@
 const { map } = require('lodash');
 
 module.exports = (rawData) => {
-  console.log(rawData);
   const {
     results: { bindings: items },
   } = rawData;
