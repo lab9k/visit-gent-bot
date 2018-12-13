@@ -1,5 +1,5 @@
 const express = require('express');
-const { map, sample } = require('lodash');
+const { map, sample, sampleSize } = require('lodash');
 
 const router = express.Router();
 const { WebhookClient, Card } = require('dialogflow-fulfillment');
@@ -27,8 +27,9 @@ intentMap.set('ChooseTypeIntent', (agent) => {
           agent.add('Er ging iets mis.');
           return;
         }
-        log.log('info', JSON.stringify(data));
-        agent.add(map(data, convertToCards));
+        log.log('info', JSON.stringify(data[0]));
+
+        agent.add(map(sampleSize(data, 8), convertToCards));
       });
       break;
     case 'Attracties':
@@ -37,8 +38,8 @@ intentMap.set('ChooseTypeIntent', (agent) => {
           agent.add('Er ging iets mis.');
           return;
         }
-        log.log('info', JSON.stringify(data));
-        agent.add(map(data, convertToCards));
+        log.log('info', JSON.stringify(data[0]));
+        agent.add(map(sampleSize(data, 8), convertToCards));
       });
       break;
     default:
