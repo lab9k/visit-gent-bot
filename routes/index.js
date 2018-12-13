@@ -19,7 +19,6 @@ intentMap.set('ChooseTypeIntent', (agent) => {
     imageUrl: sample(d.images),
     buttonText: 'Go to website',
     buttonUrl: d.pageUrl,
-    platform: 'facebook',
   });
   switch (type) {
     case 'Events':
