@@ -4,15 +4,13 @@ const getData = (kind) => {
   const api = new Sparql('https://stad.gent/sparql');
   switch (kind) {
     case 'attractions':
-      return cb => api.getAttractions().then(data => cb(null, data));
+      return api.getAttractions().then(data => [null, data]);
     case 'events':
-      return cb => api.getEvents().then(data => cb(null, data));
+      return api.getEvents().then(data => [null, data]);
     case 'combined':
-      return cb => Promise
-        .all([api.getAttractions(), api.getEvents()])
-        .then(data => cb(null, data));
+      return Promise.all([api.getAttractions(), api.getEvents()]).then(data => [null, data]);
     default:
-      return cb => Promise.resolve('No valid datatype specified.').then(err => cb(new Error(err), null));
+      return Promise.resolve('No valid datatype specified.').then(err => [new Error(err), null]);
   }
 };
 
