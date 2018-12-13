@@ -23,6 +23,7 @@ intentMap.set('ChooseTypeIntent', (agent) => {
   switch (type) {
     case 'Events':
       getData('events')((data) => {
+        log.log('info', data[0]);
         agent.add(map(data, convertToCards));
       });
       break;
