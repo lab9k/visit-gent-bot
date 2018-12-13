@@ -1,11 +1,13 @@
-const { map } = require('lodash');
+const { map, filter } = require('lodash');
+
+const onlyNl = item => item.name['xml:lang'] === 'nl';
 
 module.exports = (rawData) => {
   const {
     results: { bindings: items },
   } = rawData;
   return map(
-    items,
+    filter(items, onlyNl),
     ({
       attraction: { value: attraction },
       name: { value: name },
