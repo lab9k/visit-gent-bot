@@ -1,6 +1,5 @@
 const axios = require('axios');
 const rawParse = require('../util/rawParse');
-const log = require('../util/log')(__filename.split('/').pop());
 
 class SparqlAPI {
   constructor(baseUrl) {
@@ -22,10 +21,7 @@ class SparqlAPI {
   }
 
   query(query) {
-    return axios.get(this.baseUrl, { params: { ...this.options, query } }).then((json) => {
-      log.info(JSON.stringify(json));
-      return json.data;
-    });
+    return axios.get(this.baseUrl, { params: { ...this.options, query } }).then(({ data }) => data);
   }
 }
 
