@@ -1,12 +1,12 @@
 const { format, createLogger, transports } = require('winston');
 
 const {
-  combine, timestamp, label, printf,
+  combine, label, printf,
 } = format;
 
-const myFormat = printf(info => `${info.timestamp} [${info.label}] ${info.level}: \n${info.message}`);
+const myFormat = printf(info => `[${info.label}] ${info.level}: \n${info.message}`);
 
 module.exports = name => createLogger({
-  format: combine(label({ label: name }), timestamp(), myFormat),
+  format: combine(label({ label: name }), myFormat),
   transports: [new transports.Console()],
 });
