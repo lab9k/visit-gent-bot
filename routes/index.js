@@ -22,13 +22,20 @@ intentMap.set('ChooseTypeIntent', (agent) => {
   });
   switch (type) {
     case 'Events':
-      getData('events')((data) => {
-        log.log('info', data[0]);
+      getData('events')((err, data) => {
+        if (err) {
+          agent.add('Er ging iets mis.');
+          return;
+        }
         agent.add(map(data, convertToCards));
       });
       break;
     case 'Attracties':
-      getData('attractions')((data) => {
+      getData('attractions')((err, data) => {
+        if (err) {
+          agent.add('Er ging iets mis.');
+          return;
+        }
         agent.add(map(data, convertToCards));
       });
       break;
