@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const { WebhookClient } = require('dialogflow-fulfillment');
+const { WebhookClient, Suggestion } = require('dialogflow-fulfillment');
 const log = require('../util/log')(__filename.split('/').pop());
 
 /**
@@ -9,7 +9,7 @@ const log = require('../util/log')(__filename.split('/').pop());
  * @type {Map<string, function>}
  */
 const intentMap = new Map();
-intentMap.set('Default Welcome Intent', agent => agent.add('welcome!'));
+intentMap.set('Default Welcome Intent', agent => agent.add(new Suggestion({ title: 'test' })));
 
 /**
  * Routes HTTP POST requests to index. It catches all fulfillment's from Dialogflow.
