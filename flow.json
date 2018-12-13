@@ -1,0 +1,9 @@
+{
+  "Default Welcome Intent": {
+    "text": "",
+    "suggestions": {
+      "attractions": {},
+      "events": {}
+    }
+  }
+}

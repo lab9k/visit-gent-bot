@@ -5,12 +5,13 @@
 PREFIX schema: <http://schema.org/>
 PREFIX n3: <http://schema.org/>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-SELECT DISTINCT ?attraction ?name ?description ?page
+SELECT DISTINCT ?attraction ?name ?description ?page (GROUP_CONCAT(?image; SEPARATOR=", ") AS ?images)
 WHERE {
   ?attraction a <http://schema.org/TouristAttraction> .
   ?attraction n3:name ?name .
   ?attraction n3:description ?description .
-  ?attraction foaf:page ?page
+  ?attraction foaf:page ?page .
+  ?attraction n3:image ?image .
   FILTER (langMatches(lang(?name), lang(?description))) .
-} LIMIT 1000 OFFSET 0.
+} GROUP BY ?attraction ?name ?description ?page
 ```
