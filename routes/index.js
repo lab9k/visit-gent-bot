@@ -3,6 +3,7 @@ const { map, sample, sampleSize } = require('lodash');
 
 const router = express.Router();
 const { WebhookClient, Card } = require('dialogflow-fulfillment');
+const { PLATFORMS } = require('dialogflow-fulfillment/src/rich-responses/rich-response');
 const log = require('../util/log')(__filename.split('/').pop());
 const getData = require('../services/index');
 
@@ -19,6 +20,7 @@ intentMap.set('ChooseTypeIntent', (agent) => {
     imageUrl: sample(d.images),
     buttonText: 'Go to website',
     buttonUrl: d.pageUrl,
+    platform: PLATFORMS.FACEBOOK,
   });
   switch (type) {
     case 'Events':
