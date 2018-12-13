@@ -27,6 +27,7 @@ intentMap.set('ChooseTypeIntent', (agent) => {
           agent.add('Er ging iets mis.');
           return;
         }
+        log.log('events', JSON.stringify(data));
         agent.add(map(data, convertToCards));
       });
       break;
@@ -36,6 +37,7 @@ intentMap.set('ChooseTypeIntent', (agent) => {
           agent.add('Er ging iets mis.');
           return;
         }
+        log.log('attracties', JSON.stringify(data));
         agent.add(map(data, convertToCards));
       });
       break;
