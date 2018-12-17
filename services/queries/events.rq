@@ -1,4 +1,3 @@
-PREFIX schema: <http://schema.org/>
 PREFIX n3: <http://schema.org/>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 SELECT 
@@ -6,14 +5,20 @@ SELECT
   ?name
   ?description
   ?page
+  ?startDate
+  ?endDate
+  ?locationPage
   (GROUP_CONCAT(?image; SEPARATOR=", ") AS ?images)
 FROM <http://stad.gent/tourism/events/>
 WHERE { 
-    ?attraction a <http://schema.org/Event> .
+    ?attraction a n3:Event .
     ?attraction n3:name ?name .
     ?attraction n3:description ?description .
-    ?attraction foaf:page ?page .
+    ?attraction foaf:page ?page . 
     ?attraction n3:image ?image .
+    OPTIONAL { ?attraction n3:endDate ?endDate } .
+    OPTIONAL { ?attraction n3:startDate ?startDate } .
+    OPTIONAL { ?attraction n3:location ?location . ?location foaf:page ?locationPage } .
     FILTER (langMatches(lang(?name), lang(?description))) .
 } 
-GROUP BY ?attraction ?name ?description ?page
+GROUP BY ?attraction ?name ?description ?page ?startDate ?endDate ?locationPage
