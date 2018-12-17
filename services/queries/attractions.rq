@@ -1,7 +1,12 @@
 PREFIX schema: <http://schema.org/>
 PREFIX n3: <http://schema.org/>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-SELECT DISTINCT ?attraction ?name ?description ?page (GROUP_CONCAT(?image; SEPARATOR=", ") AS ?images)
+SELECT 
+  ?attraction
+  ?name 
+  ?description 
+  ?page 
+  (GROUP_CONCAT(?image; SEPARATOR=", ") AS ?images)
 WHERE {
   ?attraction a <http://schema.org/TouristAttraction> .
   ?attraction n3:name ?name .
