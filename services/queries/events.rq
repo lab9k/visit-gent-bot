@@ -8,7 +8,7 @@ SELECT
   ?startDate
   ?endDate
   ?locationPage
-  (GROUP_CONCAT(?image; SEPARATOR=", ") AS ?images)
+  (GROUP_CONCAT(?image; SEPARATOR=", ") AS ?imagesList)
 FROM <http://stad.gent/tourism/events/>
 WHERE { 
     ?attraction a n3:Event .
