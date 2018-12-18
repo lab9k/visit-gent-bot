@@ -13,13 +13,6 @@ const getData = require('../services/index');
 const intentMap = new Map();
 intentMap.set('ChooseTypeIntent', (agent) => {
   const { query: type } = agent;
-  const convertToCards = d => new Card({
-    title: d.name,
-    text: d.description,
-    imageUrl: sample(d.images),
-    buttonText: 'Go to website',
-    buttonUrl: d.pageUrl,
-  });
   switch (type) {
     case 'Events':
       return getData('events').then(([err, data]) => {
@@ -28,7 +21,18 @@ intentMap.set('ChooseTypeIntent', (agent) => {
           return;
         }
 
-        agent.add(map(sampleSize(data, 8), convertToCards));
+        agent.add(
+          map(
+            sampleSize(data, 8),
+            d => new Card({
+              title: d.name,
+              text: d.description,
+              imageUrl: sample(d.imagesList),
+              buttonText: 'Go to website',
+              buttonUrl: d.page,
+            }),
+          ),
+        );
       });
     case 'Attracties':
       return getData('events').then(([err, data]) => {
@@ -37,7 +41,18 @@ intentMap.set('ChooseTypeIntent', (agent) => {
           return;
         }
 
-        agent.add(map(sampleSize(data, 8), convertToCards));
+        agent.add(
+          map(
+            sampleSize(data, 8),
+            d => new Card({
+              title: d.name,
+              text: d.description,
+              imageUrl: sample(d.imagesList),
+              buttonText: 'Go to website',
+              buttonUrl: d.strurl,
+            }),
+          ),
+        );
       });
     default:
       return agent.add('Ik versta je niet.');
