@@ -68,7 +68,7 @@ router.post('/', (req, res) => {
   }
 
   const agent = new WebhookClient({ request: req, response: res });
-  agent.handleRequest(intentMap).catch(err => log.log('error', err));
+  agent.handleRequest(intentMap).catch(err => log('error', err));
 });
 
 module.exports = router;
