@@ -15,45 +15,49 @@ intentMap.set('ChooseTypeIntent', (agent) => {
   const { query: type } = agent;
   switch (type) {
     case 'Events':
-      return getData('events').then(([err, data]) => {
-        if (err) {
-          agent.add('Er ging iets mis.');
-          return;
-        }
-        log('info', data);
-        agent.add(
-          map(
-            sampleSize(data, 8),
-            d => new Card({
-              title: d.name,
-              text: d.description,
-              imageUrl: sample(d.imagesList),
-              buttonText: 'Go to website',
-              buttonUrl: d.page,
-            }),
-          ),
-        );
-      });
+      return getData('events')
+        .then(([err, data]) => {
+          if (err) {
+            agent.add('Er ging iets mis.');
+            return;
+          }
+          log('info', data);
+          agent.add(
+            map(
+              sampleSize(data, 8),
+              d => new Card({
+                title: d.name,
+                text: d.description,
+                imageUrl: sample(d.imagesList),
+                buttonText: 'Go to website',
+                buttonUrl: d.page,
+              }),
+            ),
+          );
+        })
+        .catch(err => log('error', err));
     case 'Attracties':
-      return getData('events').then(([err, data]) => {
-        if (err) {
-          agent.add('Er ging iets mis.');
-          return;
-        }
-        log('info', data);
-        agent.add(
-          map(
-            sampleSize(data, 8),
-            d => new Card({
-              title: d.name,
-              text: d.description,
-              imageUrl: sample(d.imagesList),
-              buttonText: 'Go to website',
-              buttonUrl: d.strurl,
-            }),
-          ),
-        );
-      });
+      return getData('events')
+        .then(([err, data]) => {
+          if (err) {
+            agent.add('Er ging iets mis.');
+            return;
+          }
+          log('info', data);
+          agent.add(
+            map(
+              sampleSize(data, 8),
+              d => new Card({
+                title: d.name,
+                text: d.description,
+                imageUrl: sample(d.imagesList),
+                buttonText: 'Go to website',
+                buttonUrl: d.strurl,
+              }),
+            ),
+          );
+        })
+        .catch(err => log('error', err));
     default:
       return agent.add('Ik versta je niet.');
   }
