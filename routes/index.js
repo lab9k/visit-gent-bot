@@ -37,7 +37,7 @@ intentMap.set('ChooseTypeIntent', (agent) => {
         })
         .catch(err => log('error', err));
     case 'Attracties':
-      return getData('events')
+      return getData('attractions')
         .then(([err, data]) => {
           if (err) {
             agent.add('Er ging iets mis.');
