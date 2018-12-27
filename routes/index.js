@@ -3,7 +3,7 @@ const { map, sample, sampleSize } = require('lodash');
 
 const router = express.Router();
 const { WebhookClient, Card } = require('dialogflow-fulfillment');
-const { log, info } = require('../util/log')(__filename.split('/').pop());
+const { log } = require('../util/log')(__filename.split('/').pop());
 const getData = require('../services/index');
 
 /**
@@ -18,10 +18,10 @@ intentMap.set('ChooseTypeIntent', (agent) => {
       return getData('events')
         .then(([err, data]) => {
           if (err) {
+            log('error', err);
             agent.add('Er ging iets mis.');
             return;
           }
-          info(data);
           agent.add(
             map(
               sampleSize(data, 8),
@@ -40,10 +40,10 @@ intentMap.set('ChooseTypeIntent', (agent) => {
       return getData('attractions')
         .then(([err, data]) => {
           if (err) {
+            log('error', err);
             agent.add('Er ging iets mis.');
             return;
           }
-          info(data);
           agent.add(
             map(
               sampleSize(data, 8),
