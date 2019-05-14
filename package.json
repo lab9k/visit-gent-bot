@@ -7,21 +7,21 @@
     "test": "nodemon ./bin/www"
   },
   "dependencies": {
-    "actions-on-google": "^2.5.0",
+    "actions-on-google": "^2.7.0",
     "axios": "^0.18.0",
-    "cookie-parser": "~1.4.3",
+    "cookie-parser": "^1.4.4",
     "debug": "~2.6.9",
     "dialogflow-fulfillment": "^0.6.1",
     "dotenv": "^6.2.0",
     "express": "~4.16.0",
     "lodash": "^4.17.11",
     "morgan": "~1.9.0",
-    "winston": "^3.1.0"
+    "winston": "^3.2.1"
   },
   "devDependencies": {
-    "eslint": "^5.10.0",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "nodemon": "^1.18.8"
+    "eslint-plugin-import": "^2.17.2",
+    "nodemon": "^1.19.0"
   }
 }
